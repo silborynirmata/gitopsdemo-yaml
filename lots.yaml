@@ -3,7 +3,7 @@ kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
   annotations: {}
-  name: "foo"
+  name: "bar"
 spec:
   replicas: 1
   revisionHistoryLimit: 5
