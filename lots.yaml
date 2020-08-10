@@ -160,3 +160,93 @@ spec:
   resources:
     requests:
       storage: 5M
+---
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  annotations: {}
+  uid: "dbc4c524-fadb-4943-bb52-3613885ebd9b"
+  name: "tomcat"
+  labels:
+    nirmata.io/component: "tomcat"
+spec:
+  clusterIP: "10.100.51.247"
+  externalIPs: []
+  healthCheckNodePort: 0
+  loadBalancerSourceRanges: []
+  sessionAffinity: "None"
+  type: "ClusterIP"
+  selector:
+    nirmata.io/component: "tomcat"
+  ports:
+  - name: "http"
+    port: 80
+    protocol: "TCP"
+    targetPort: 8080
+
+---
+kind: "Deployment"
+apiVersion: "apps/v1"
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    policies.kyverno.io/patches: "autogen-require-image-tag.disallow-latest-tag.kyverno.io:\
+      \ replaced /\nautogen-validate-add-capabilities.disallow-new-capabilities.kyverno.io:\
+      \ replaced /\nautogen-validate-allowPrivilegeEscalation.disallow-privileged.kyverno.io:\
+      \ replaced\n  /\nautogen-validate-docker-sock-mount.disallow-docker-sock-mount.kyverno.io:\
+      \ replaced\n  /\nautogen-validate-helm-tiller.disallow-helm-tiller.kyverno.io:\
+      \ replaced /\nautogen-validate-host-network.disallow-host-network-port.kyverno.io:\
+      \ replaced /\nautogen-validate-host-port.disallow-host-network-port.kyverno.io:\
+      \ replaced /\nautogen-validate-hostPID-hostIPC.disallow-host-pid-ipc.kyverno.io:\
+      \ replaced /\nautogen-validate-hostPath.disallow-bind-mounts.kyverno.io: replaced\
+      \ /\nautogen-validate-image-tag.disallow-latest-tag.kyverno.io: replaced /\n\
+      autogen-validate-livenessProbe-readinessProbe.require-pod-probes.kyverno.io:\
+      \ replaced\n  /\nautogen-validate-privileged.disallow-privileged.kyverno.io:\
+      \ replaced /\nautogen-validate-readOnlyRootFilesystem.require-ro-rootfs.kyverno.io:\
+      \ replaced /\nautogen-validate-resources.require-pod-requests-limits.kyverno.io:\
+      \ replaced /\nautogen-validate-runAsNonRoot.disallow-root-user.kyverno.io: replaced\
+      \ /\nautogen-validate-sysctls.disallow-sysctls.kyverno.io: replaced /\nrequire-podcontroller-namespace.disallow-default-namespace.kyverno.io:\
+      \ replaced /\nvalidate-podcontroller-namespace.disallow-default-namespace.kyverno.io:\
+      \ replaced /\n"
+  uid: "98701144-7f4c-48ac-bdd6-6146120b335e"
+  name: "tomcat"
+  labels:
+    nirmata.io/component: "tomcat"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      nirmata.io/component: "tomcat"
+    matchExpressions: []
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        nirmata.io/component: "tomcat"
+    spec:
+      restartPolicy: "Always"
+      terminationGracePeriodSeconds: 30
+      nodeSelector: {}
+      schedulerName: "default-scheduler"
+      dnsPolicy: "ClusterFirst"
+      containers:
+      - name: "tomcat"
+        image: "tomcat:latest"
+        command: []
+        args: []
+        terminationMessagePath: "/dev/termination-log"
+        terminationMessagePolicy: "File"
+        imagePullPolicy: "Always"
+        resources:
+          limits: {}
+          requests: {}
+      securityContext:
+        supplementalGroups: []
