@@ -4,7 +4,7 @@ kind: "Service"
 metadata:
   annotations: {}
   uid: "dbc4c524-fadb-4943-bb52-3613885ebd9b"
-  name: "tomcat"
+  name: "tomcat-dev"
   labels:
     nirmata.io/component: "tomcat"
 spec:
@@ -47,7 +47,7 @@ metadata:
       \ replaced /\nvalidate-podcontroller-namespace.disallow-default-namespace.kyverno.io:\
       \ replaced /\n"
   uid: "98701144-7f4c-48ac-bdd6-6146120b335e"
-  name: "tomcat"
+  name: "tomcat-dev"
   labels:
     nirmata.io/component: "tomcat"
 spec:
