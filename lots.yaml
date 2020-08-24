@@ -52,7 +52,7 @@ metadata:
     nirmata.io/component: "tomcat"
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 5
   selector:
     matchLabels:
