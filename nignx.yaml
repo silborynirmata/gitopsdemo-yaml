@@ -3,9 +3,9 @@ kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
   annotations: {}
-  name: "foo"
+  name: "nginx-git"
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 5
   selector:
     matchLabels:
