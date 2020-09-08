@@ -3,13 +3,13 @@ kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
   annotations: {}
-  name: "foo"
+  name: "nginx-master"
 spec:
   replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: "foo"
+      app: "nginx-master"
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -18,13 +18,13 @@ spec:
   template:
     metadata:
       labels:
-        app: "foo"
+        app: "nginx-master"
       annotations: {}
     spec:
       terminationGracePeriodSeconds: 30
       nodeSelector: {}
       containers:
-      - name: "foo"
+      - name: "nginx-master"
         image: "nginx:latest"
         command:
         - "sleep"
