@@ -5,7 +5,7 @@ metadata:
   annotations: {}
   name: "nginx-master"
 spec:
-  replicas: 3
+  replicas: 2
   revisionHistoryLimit: 5
   selector:
     matchLabels:
