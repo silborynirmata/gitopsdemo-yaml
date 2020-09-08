@@ -25,7 +25,7 @@ spec:
       nodeSelector: {}
       containers:
       - name: "foo"
-        image: "busybox:latest"
+        image: "nginx:latest"
         command:
         - "sleep"
         args:
