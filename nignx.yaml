@@ -3,7 +3,7 @@ kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
   annotations: {}
-  name: "nginx-git2"
+  name: "nginx-test"
 spec:
   replicas: 3
   revisionHistoryLimit: 5
