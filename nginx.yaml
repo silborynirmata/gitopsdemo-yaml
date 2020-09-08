@@ -3,9 +3,9 @@ kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
   annotations: {}
-  name: "nginx-test"
+  name: "nginx-test2"
 spec:
-  replicas: 3
+  replicas: 2
   revisionHistoryLimit: 5
   selector:
     matchLabels:
