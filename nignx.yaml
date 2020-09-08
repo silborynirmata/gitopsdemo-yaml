@@ -1,0 +1,57 @@
+---
+kind: "Deployment"
+apiVersion: "apps/v1"
+metadata:
+  annotations: {}
+  name: "foo"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: "foo"
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: "foo"
+      annotations: {}
+    spec:
+      terminationGracePeriodSeconds: 30
+      nodeSelector: {}
+      containers:
+      - name: "foo"
+        image: "busybox:latest"
+        command:
+        - "sleep"
+        args:
+        - "325435346536"
+        imagePullPolicy: "IfNotPresent"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: foo
+spec:
+  selector:
+    app: foo 
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: foo-https
+spec:
+  selector:
+    app: foo
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 443
