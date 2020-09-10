@@ -57,3 +57,82 @@ spec:
     - protocol: TCP
       port: 443
       targetPort: 443
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    application.environment: dev
+    nirmata.io/application.run: 360app-dev
+  name: rpm-admin-api-dev
+  namespace: poi-nonprod
+spec:
+  selector:
+    matchLabels:
+      application.environment: dev
+      nirmata.io/application.run: 360app-dev
+  template:
+    metadata:
+      labels:
+        app: rpm-admin-api
+        application.environment: dev
+        nirmata.io/application.run: 360app-dev
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "8080"
+        - name: ROOT_URL
+          value: /v1/admin/
+        - name: RPM_NATS_URI
+          valueFrom:
+            configMapKeyRef:
+              key: nats_url
+              name: rpm-cluster-configmap-dev
+        - name: USERS_FILE
+          valueFrom:
+            configMapKeyRef:
+              key: users_file
+              name: rpm-cluster-configmap-dev
+        - name: NOMINATIONS_FILE
+          valueFrom:
+            configMapKeyRef:
+              key: nominations_file
+              name: rpm-cluster-configmap-dev
+        - name: MGR_NOMINATIONS_FILE
+          valueFrom:
+            configMapKeyRef:
+              key: mgr_nominations_file
+              name: rpm-cluster-configmap-dev
+        - name: VETOES_FILE
+          valueFrom:
+            configMapKeyRef:
+              key: vetoes_file
+              name: rpm-cluster-configmap-dev
+        - name: ENV
+          valueFrom:
+            configMapKeyRef:
+              key: env
+              name: rpm-cluster-configmap-dev
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              key: log_level
+              name: rpm-cluster-configmap-dev
+        hostNetwork: false
+        image: docker-repo/360nominations/rpm-admin-api:0.2.1.94-616d569
+        imagePullPolicy: IfNotPresent
+        name: rpm-admin-api
+        ports:
+        - containerPort: 8080
+        readOnlyRootFilesystem: true
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /mnt/data
+          name: my-rpm-storage
+      volumes:
+      - name: my-rpm-storage
+        persistentVolumeClaim:
+          claimName: rpm-storage-claim-dev
