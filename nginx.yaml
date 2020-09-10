@@ -80,6 +80,13 @@ spec:
     spec:
       containers:
       - env:
+        - name: DEBUG_RPM_LOAD_TEST
+          valueFrom:
+            configMapKeyRef:
+              key: DEBUG_RPM_LOAD_TEST
+              name: rpm-cluster-configmap-dev
+        - name: ENV
+          value: dev
         - name: PORT
           value: "8080"
         - name: ROOT_URL
@@ -94,33 +101,13 @@ spec:
             configMapKeyRef:
               key: users_file
               name: rpm-cluster-configmap-dev
-        - name: NOMINATIONS_FILE
-          valueFrom:
-            configMapKeyRef:
-              key: nominations_file
-              name: rpm-cluster-configmap-dev
-        - name: MGR_NOMINATIONS_FILE
-          valueFrom:
-            configMapKeyRef:
-              key: mgr_nominations_file
-              name: rpm-cluster-configmap-dev
-        - name: VETOES_FILE
-          valueFrom:
-            configMapKeyRef:
-              key: vetoes_file
-              name: rpm-cluster-configmap-dev
-        - name: ENV
-          valueFrom:
-            configMapKeyRef:
-              key: env
-              name: rpm-cluster-configmap-dev
         - name: LOG_LEVEL
           valueFrom:
             configMapKeyRef:
               key: log_level
               name: rpm-cluster-configmap-dev
         hostNetwork: false
-        image: docker-repo/360nominations/rpm-admin-api:0.2.1.94-616d569
+        image: docker-repo/360nominations/rpm-admin-api:0.2.1.95-66797ca
         imagePullPolicy: IfNotPresent
         name: rpm-admin-api
         ports:
