@@ -6,7 +6,7 @@ Param(
     [parameter(Mandatory = $false)] $InterfaceName="Ethernet",
     [parameter(Mandatory = $false)] $Release = "1.16.9",
     [parameter(Mandatory = $false)] $NanosServerImageTag = "10.0.17763.802",
-    [parameter(Mandatory = $false)] $ServerCoreImageTag = "ltsc2019",
+    [parameter(Mandatory = $false)] $ServerCoreImageTag = "1809",
 
     [parameter(Mandatory = $false)] [switch] $Reset=$false
 )
