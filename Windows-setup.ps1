@@ -1338,11 +1338,11 @@ InstallKubelet -KubeConfig (GetKubeConfig) -CniDir (GetCniPath) `
 -CniConf $(GetCniConfigPath) -KubeDnsServiceIp (GetKubeDnsServiceIp) `
 -NodeIp $Global:ManagementIp -KubeletFeatureGates $Global:KubeletFeatureGates 
 StartKubelet
-WaitForNodeRegistration -TimeoutSeconds 10
+WaitForNodeRegistration -TimeoutSeconds 30
 
 # Install CNI & Flannel
 CreateExternalNetwork -NetworkMode $Global:NetworkMode -InterfaceName $Global:InterfaceName
-sleep 20
+sleep 30
 StartFlanneld 
 WaitForNetwork $Global:NetworkName
 
