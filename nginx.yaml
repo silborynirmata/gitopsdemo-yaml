@@ -26,11 +26,10 @@ spec:
       containers:
       - name: "nginx-master"
         image: "nginx:latest"
-        command:
-        - "sleep"
-        args:
-        - "325435346536"
         imagePullPolicy: "IfNotPresent"
+        env:
+        - name: FOO
+          value: "Hello how are you?"
 ---
 apiVersion: v1
 kind: Service
