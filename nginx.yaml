@@ -29,7 +29,7 @@ spec:
         imagePullPolicy: "IfNotPresent"
         env:
         - name: FOO
-          value: "Hello how are you?"
+          value: "Hello where are you?"
 ---
 apiVersion: v1
 kind: Service
