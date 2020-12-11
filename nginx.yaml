@@ -27,6 +27,9 @@ spec:
       - name: "nginx-master"
         image: "nginx:latest"
         imagePullPolicy: "IfNotPresent"
+        env:
+        - name: FOO
+          value: "Hello where are you?"
 ---
 apiVersion: v1
 kind: Service
