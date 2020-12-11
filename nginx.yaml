@@ -28,7 +28,7 @@ spec:
         image: "nginx:latest"
         imagePullPolicy: "IfNotPresent"
         env:
-        - name: FOO
+        - name: BAR
           value: "Hello where are you?"
 ---
 apiVersion: v1
