@@ -5,15 +5,15 @@ metadata:
   annotations: {}
   name: "nginx-master"
 spec:
-  replicas: 1
-  revisionHistoryLimit: 5
+  replicas: 2
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: "nginx-master"
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 2
       maxUnavailable: 0
   template:
     metadata:
@@ -21,15 +21,17 @@ spec:
         app: "nginx-master"
       annotations: {}
     spec:
-      terminationGracePeriodSeconds: 30
+      terminationGracePeriodSeconds: 15
       nodeSelector: {}
       containers:
       - name: "nginx-master"
         image: "nginx:latest"
         imagePullPolicy: "IfNotPresent"
         env:
-        - name: BAR
-          value: "Hello where are you?"
+        - name: BAR3
+          value: "I can not do that Dave?"
+        - name: FOOburger
+          value: "Eaten"
 ---
 apiVersion: v1
 kind: Service
@@ -52,5 +54,5 @@ spec:
     app: foo
   ports:
     - protocol: TCP
-      port: 443
-      targetPort: 443
+      port: 80
+      targetPort: 80
