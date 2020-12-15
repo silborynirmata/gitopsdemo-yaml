@@ -15,5 +15,5 @@ data:
   user-interface.properties: |
     color.good=purple
     color.bad=yellow
-    allow.textmode=true
+    allow.textmode=false
     
